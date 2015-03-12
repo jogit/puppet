@@ -1,0 +1,8 @@
+---
+nrpe::plugins:
+  check_apt:
+    plugin: 'check_apt'
+#    args: '-w 20% -c 10% -p /'
+#  check_load:
+#    args: '-w 10,8,8 -c 12,10,9'
+#  check_myapp:
