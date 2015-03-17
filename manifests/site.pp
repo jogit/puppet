@@ -18,7 +18,7 @@ node default {
   
   nrpe::plugin { 'event_ntp':
              # source_prefix => 'puppet:///',
-              source => 'nrpe/files/event_ntp.sh'
+              source => 'nrpe/event_ntp.sh'
         }
   }
 
