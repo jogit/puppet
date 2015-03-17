@@ -1,74 +1,31 @@
 {
-  "name": "ghoneycutt-nrpe",
-  "version": "1.0.0",
-  "author": "ghoneycutt",
-  "summary": "Manage NRPE",
-  "license": "Apache License, Version 2.0",
-  "source": "git://github.com/ghoneycutt/puppet-module-nrpe.git",
-  "project_page": "https://github.com/ghoneycutt/puppet-module-nrpe",
-  "issues_url": "https://github.com/ghoneycutt/puppet-module-nrpe/issues",
-  "requirements": [
-    {
-      "name": "pe",
-      "version_requirement": "3.2.x"
-    },
-    {
-      "name": "puppet",
-      "version_requirement": "3.x"
-    }
+  "name": "example42-nrpe",
+  "version": "2.0.12",
+  "author": "Alessandro Franceschi",
+  "summary": "Puppet module for nrpe",
+  "license": "Apache2",
+  "source": "https://github.com/example42/puppet-nrpe",
+  "project_page": "http://www.example42.com",
+  "issues_url": "https://github.com/example42/puppet-nrpe/issues",
+  "description": "This module installs and manages nrpe. Check README.rdoc for details. Puppi is required for some common functions: you can install them without using the whole module. Monitor and firewall dependencies are needed only if the relevant features are enabled",
+  "types": [
+  
   ],
-  "operatingsystem_support": [
-    {
-      "operatingsystem": "Debian",
-      "operatingsystemrelease": [
-        "6"
-      ]
-    },
-    {
-      "operatingsystem": "RedHat",
-      "operatingsystemrelease": [
-        "6"
-      ]
-    },
-    {
-      "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "6"
-      ]
-    },
-    {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "6"
-      ]
-    },
-    {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "6"
-      ]
-    },
-    {
-      "operatingsystem": "Solaris",
-      "operatingsystemrelease": [
-        "10"
-      ]
-    },
-    {
-      "operatingsystem": "SLES"
-    },
-    {
-      "operatingsystem": "SLED"
-    },
-    {
-      "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [
-        "12.04"
-      ]
-    }
-  ],
-  "description": "Manage NRPE - Nagios Remote Plugin Executor",
+  "checksums": {
+  },
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 3.2.0"}
+    {
+      "name": "example42/puppi",
+      "version_requirement": ">= 2.0.0"
+    },
+    {
+      "name": "example42/monitor",
+      "version_requirement": ">= 2.0.0"
+    },
+    {
+      "name": "example42/firewall",
+      "version_requirement": ">= 2.0.0"
+    },
+    {"name":"example42/puppi","version_requirement":">= 2.0.0"}
   ]
 }

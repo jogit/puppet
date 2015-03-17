@@ -1,50 +1,70 @@
-# == Define: nrpe::plugin
+# Define: nrpe::plugin
 #
-# Manage a file to be included from include_dir configuration in nrpe.cfg that
-# does a remote check.
+# Adds or configures a Nrpe plugin
 #
-# command[check_hda1]=@libexecdir@/check_disk -w 20% -c 10% -p /dev/hda1
-# command[$name]=$libexecdir/$plugin $args
+# == Parameters
+#
+# Module Specific parameters
+#
+# [*source*]
+#   The source of the content to use as plugin.
+#   Can be omitted if a template path is specified instead.
+#
+# [*source_prefix*]
+#   Prefix of the source. Defaults to puppet:///
+#
+# [*template*]
+#   The template to use for the plugin contents.
+#
+# [*enable*]
+#   To enable, or not to enable - that's the question.
+#
+#
+# == Examples#
+# Provide a custom plugin:
+#
+# nrpe::plugin { 'check_redis':
+#   source => 'example42/nrpe/redis',
+# }
+#
+
 define nrpe::plugin (
-  $ensure     = 'present',
-  $args       = 'UNSET',
-  $libexecdir = 'USE_DEFAULTS',
-  $plugin     = 'USE_DEFAULTS',
+  $source = '',
+  $source_prefix = 'puppet:///modules/',
+  $template = undef,
+  $enable = true,
 ) {
 
-  validate_re($ensure,'^(present)|(absent)$',
-    "nrpe::plugin::${name}::ensure must be 'present' or 'absent'. Detected value is <${ensure}>.")
+  $ensure = bool2ensure($enable)
 
-  if $ensure == 'present' {
-    $plugin_ensure = 'file'
+  if ($source == undef or $source == '') {
+    $source_path = undef
   } else {
-    $plugin_ensure = 'absent'
+    $source_path = "${source_prefix}${source}"
   }
 
-  include nrpe
-
-  if $plugin == 'USE_DEFAULTS' {
-    $plugin_real = $name
+  if ($template != undef) {
+    $content = template($template)
   } else {
-    $plugin_real = $plugin
+    $content = undef
   }
 
-  if $libexecdir == 'USE_DEFAULTS' {
-    $libexecdir_real = $nrpe::libexecdir_real
-  } else {
-    $libexecdir_real = $libexecdir
+  if $source_path or $content {
+    file { "Nrpe_plugin_${name}":
+      ensure   => $ensure,
+      path     => "${nrpe::pluginsdir}/${name}",
+      owner    => root,
+      group    => root,
+      mode     => '0755',
+      require  => $nrpe::nrpe_plugin_require,
+      notify   => Service['nrpe'],
+      source   => $source_path,
+      content  => $content,
+      seluser  => 'system_u',
+      selrole  => 'object_r',
+      seltype  => 'nagios_unconfined_plugin_exec_t',
+      selrange => 's0',
+    }
   }
 
-  validate_absolute_path($libexecdir_real)
-
-  file { "nrpe_plugin_${name}":
-    ensure  => $plugin_ensure,
-    path    => "${nrpe::include_dir_real}/${name}.cfg",
-    content => template('nrpe/plugin.erb'),
-    owner   => $nrpe::nrpe_config_owner,
-    group   => $nrpe::nrpe_config_group,
-    mode    => $nrpe::nrpe_config_mode,
-    require => File['nrpe_config_dot_d'],
-    notify  => Service['nrpe_service'],
-  }
 }

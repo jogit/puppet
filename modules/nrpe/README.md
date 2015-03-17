@@ -1,297 +1,141 @@
-# puppet-module-nrpe
-===
+# Puppet module: nrpe
 
-[![Build Status](https://travis-ci.org/ghoneycutt/puppet-module-nrpe.png?branch=master)](https://travis-ci.org/ghoneycutt/puppet-module-nrpe)
+This is a Puppet module for nrpe based on the second generation layout ("NextGen") of Example42 Puppet Modules.
 
-This module allows you to manage NRPE and its plugins. It does not name any of
-the plugins, so you can use whatever you like by specifying a hash of plugins
-and their associated parameters.
+Made by Alessandro Franceschi / Lab42
 
-===
+Official site: http://www.example42.com
 
-# Compatibility
----------------
-This module supports Puppet v3 with Ruby versions 1.8.7, 1.9.3, 2.0.0 and 2.1.0.
+Official git repository: http://github.com/example42/puppet-nrpe
 
-It is tested on the following platforms.
+Released under the terms of Apache 2 License.
 
-* Debian 6
-* EL 6
-* Suse 11
-* Solaris 10
-* Ubuntu 12
+This module requires functions provided by the Example42 Puppi module (you need it even if you don't use and install Puppi)
 
-===
 
-# Class `nrpe`
 
-## Parameters
+For detailed info about the logic and usage patterns of Example42 modules check the DOCS directory on Example42 main modules set.
 
-nrpe_package
-------------
-Name of package(s) for NRPE.
+## USAGE - Basic management
 
-- *Default*: based on OS platform.
+* Install nrpe with default settings
 
-nrpe_package_ensure
--------------------
-String to pass to ensure attribute for the NRPE package.
+        class { 'nrpe': }
 
-- *Default*: 'present'
+* Disable nrpe service.
 
-nrpe_package_adminfile
-----------------------
-Path to admin file for NRPE package.
+        class { 'nrpe':
+          disable => true
+        }
 
-- *Default*: based on OS platform. (used on Solaris)
+* Remove nrpe package
 
-nrpe_package_source
--------------------
-Source to NRPE package.
+        class { 'nrpe':
+          absent => true
+        }
 
-- *Default*: based on OS platform. (used on Solaris)
+* Enable auditing without without making changes on existing nrpe configuration files
 
-nagios_plugins_package
-----------------------
-Name of package(s) for nagios-plugins.
+        class { 'nrpe':
+          audit_only => true
+        }
 
-- *Default*: based on OS platform.
 
-nagios_plugins_package_ensure
------------------------------
-String to pass to ensure attribute for the nagios plugins package.
+## USAGE - Module specific parameters
 
-- *Default*: 'present'
+* Define the hosts allowed to connect to NRPE (typically the Nagios servers) 
+  This can be an array. Local host and local IP should be kept
 
-nagios_plugins_package_adminfile
---------------------------------
-Path to admin file for nagios-plugins package.
+        class { 'nrpe':
+          allowed_hosts => ['127.0.0.1', $::ipaddress , '10.42.42.20' ],
+        }
 
-- *Default*: based on OS platform. (used on Solaris)
+* Some settings that harden the default configuration. Note that they require proper configuration on the sudoers file
 
-nagios_plugins_package_source
------------------------------
-Source to nagios-plugins package.
+        class { 'nrpe':
+          allowed_hosts   => ['127.0.0.1', '10.42.42.20' ],
+          dont_blame_nrpe => '0',
+          command_prefix  => '/usr/bin/sudo',
+          use_ssl         => true,             # Already true by default
+          server_address  => $::ipadress_eth1, # Listen only on eth1 interface
+        }
 
-- *Default*: based on OS platform. (used on Solaris)
+* Do not automatically install Nagios plugins
 
-nrpe_config
------------
-Path to nrpe.cfg file.
+        class { 'nrpe':
+          pluginspackage => '',
+        }
 
-- *Default*: based on OS platform.
+* Include Nagios Plugin 
 
-nrpe_config_owner
------------------
-Owner of nrpe.cfg file.
+	    nrpe::plugin { 'check_foobar':
+              source => 'files/nrpe/check_foobar'
+        }
 
-- *Default*: 'root'
+* Install nrpe with a specific version
 
-nrpe_config_group
------------------
-Group of nrpe.cfg file.
+        class { 'nrpe':
+          version => '2.12-4'
+        }
 
-- *Default*: 'root'
 
-nrpe_config_mode
-----------------
-Mode of nrpe.cfg file.
+## USAGE - Overrides and Customizations
+* Use custom sources for main config file. Note that by default the module provides a config file as a template, so you've to undet the template argument.
 
-- *Default*: '0644'
+        class { 'nrpe':
+          source   => [ "puppet:///modules/lab42/nrpe/nrpe.conf-${hostname}" , "puppet:///modules/lab42/nrpe/nrpe.conf" ], 
+          template => undef,
+        }
 
-libexecdir
-----------
-Directory in which nrpe plugins are stored.
+* Use custom source directory for the whole configuration dir
 
-- *Default*: based on OS platform.
+        class { 'nrpe':
+          source_dir       => 'puppet:///modules/lab42/nrpe/conf/',
+          source_dir_purge => false, # Set to true to purge any existing file not present in $source_dir
+        }
 
-log_facility
-------------
-The syslog facility that should be used for logging purposes.
+* Use custom template for main config file. Note that template and source arguments are alternative. 
 
-- *Default*: 'daemon'
+        class { 'nrpe':
+          template => 'example42/nrpe/nrpe.conf.erb',
+        }
 
-pid_file
---------
-File in which the NRPE daemon should write it's process ID number.
+* Automatically include a custom subclass
 
-- *Default*: based on OS platform.
+        class { 'nrpe':
+          my_class => 'nrpe::example42',
+        }
 
-server_port
------------
-Port number for nrpe.
 
-- *Default*: '5666'
+## USAGE - Example42 extensions management 
+* Activate puppi (recommended, but disabled by default)
 
-server_address_enable
----------------------
-Boolean to include server_address in nrpe.cfg.
+        class { 'nrpe':
+          puppi    => true,
+        }
 
-- *Default*: false
+* Activate puppi and use a custom puppi_helper template (to be provided separately with a puppi::helper define ) to customize the output of puppi commands 
 
-server_address
---------------
-Address that nrpe should bind to in case there are more than one interface and you do not want nrpe to bind on all interfaces.
+        class { 'nrpe':
+          puppi        => true,
+          puppi_helper => 'myhelper', 
+        }
 
-- *Default*: '127.0.0.1'
+* Activate automatic monitoring (recommended, but disabled by default). This option requires the usage of Example42 monitor and relevant monitor tools modules
 
-nrpe_user
----------
-This determines the effective user that the NRPE daemon should run as.
+        class { 'nrpe':
+          monitor      => true,
+          monitor_tool => [ 'nagios' , 'monit' , 'munin' ],
+        }
 
-- *Default*: based on OS platform
+* Activate automatic firewalling. This option requires the usage of Example42 firewall and relevant firewall tools modules
 
-nrpe_group
----------
-This determines the effective group that the NRPE daemon should run as.
+        class { 'nrpe':       
+          firewall      => true,
+          firewall_tool => 'iptables',
+          firewall_src  => '10.42.0.0/24',
+          firewall_dst  => $ipaddress_eth0,
+        }
 
-- *Default*: based on OS platform
 
-allowed_hosts
--------------
-Array of IP address or hostnames that are allowed to talk to the NRPE daemon.
-
-- *Default*: ['127.0.0.1']
-
-dont_blame_nrpe
----------------
-This option determines whether or not the NRPE daemon will allow clients to specify arguments to commands that are executed. 0=do not allow arguments, 1=allow command arguments.
-
-- *Default*: '0'
-
-allow_bash_command_substitution
--------------------------------
-Determines whether or not the NRPE daemon will allow clients to specify arguments that contain bash command substitutions. 0=do not allow, 1=allow. Allowing is a **HIGH SECURITY RISK**.
-
-- *Default*: '0'
-
-command_prefix_enable
----------------------
-Boolean to include command_prefix in nrpe.cfg.
-
-- *Default*: false
-
-command_prefix
---------------
-Prefix all commands with a user-defined string. Must be a fully qualified path.
-
-- *Default*: '/usr/bin/sudo'
-
-debug
------
-If debugging messages are logged to the syslog facility. Values: 0=debugging off, 1=debugging on
-
-- *Default*: '0'
-
-command_timeout
----------------
-Maximum number of seconds that the NRPE daemon will allow plugins to finish executing before killing them off.
-
-- *Default*: '60'
-
-connection_timeout
-------------------
-Maximum number of seconds that the NRPE daemon will wait for a connection to be established before exiting.
-
-- *Default*: '300'
-
-allow_weak_random_seed
-----------------------
-Allows SSL even if your system does not have a /dev/random or /dev/urandom. Values: 0=only seed from /dev/[u]random, 1=also seed from weak randomness
-
-- *Default*: '0'
-
-include_dir
------------
-Include definitions from config files (with a .cfg extension) recursively from specified directory.
-
-- *Default*: based on OS platform.
-
-service_ensure
---------------
-Value of ensure parameter for nrpe service. Valid values are 'running' and 'stopped'.
-
-- *Default*: 'running'
-
-service_name
---------------
-Value of name parameter for nrpe service.
-
-- *Default*: based on OS platform.
-
-service_enable
---------------
-Boolean value of enable parameter for nrpe service.
-
-- *Default*: true
-
-hiera_merge_plugins
--------------------
-Boolean to control merges of all found instances of nrpe::plugins in Hiera. This is useful for specifying file resources at different levels of the hierarchy and having them all included in the catalog.
-
-This will default to 'true' in future versions.
-
-- *Default*: false
-
-plugins
--------
-Hash of plugins to be passed to nrpe::plugin with create_resources().
-
-- *Default*: undef
-
-purge_plugins
--------------
-Boolean to purge the nrpe.d directory of entries not managed by Puppet.
-
-- *Default*: false
-
-===
-
-# Define `nrpe::plugin`
-
-Creates a fragment in the sudoers.d directory with `$name.cfg`. Each matches the following layout, where `$args` are optional.
-
-<pre>
-command[$name]=${libexecdir}/${plugin} $args
-</pre>
-
-## Usage
-You can optionally specify a hash of nrpe plugins in Hiera.
-
-<pre>
----
-nrpe::plugins:
-  check_root_partition:
-    plugin: 'check_disk'
-    libexecdir: '/usr/lib64/nagios/plugins'
-    args: '-w 20% -c 10% -p /'
-  check_load:
-    args: '-w 10,8,8 -c 12,10,9'
-  check_myapp:
-</pre>
-
-## Parameters
-
-ensure
-------
-Ensure the plugin exists. Valid values are `present` and `absent`.
-
-- *Default*: present
-
-args
-----
-Arguments to pass to the plugin.
-
-- *Defaul*: undef
-
-libexecdir
-----------
-Directory in which nrpe plugin is stored.
-
-- *Default*: $nrpe::libexecdir, which is based on OS platform.
-
-plugin
-------
-Name of the plugin to be executed.
-
-- *Default*: $name
+[![Build Status](https://travis-ci.org/example42/puppet-nrpe.png?branch=master)](https://travis-ci.org/example42/puppet-nrpe)
