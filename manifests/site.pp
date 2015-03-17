@@ -4,7 +4,7 @@ File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 
 import "logiciels"
-import "fichiers"
+#import "fichiers"
 
 
 node default {
