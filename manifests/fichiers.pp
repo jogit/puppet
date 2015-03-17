@@ -1,12 +1,12 @@
 #class pour les fichiers a copier sur les serveurs
 class fichiers {
         #Configuration des clients puppet
-#        file { "/etc/puppet/puppet.conf":
-#                owner => root,
-#                group => root,
-#                mode => 0644,
-#                source => "puppet:///files/etc/puppet/puppet.conf",
-#        }
+        file { "/etc/puppet/puppet.conf":
+                owner => root,
+                group => root,
+                mode => 0644,
+                source => "puppet:///files/etc/puppet/puppet.conf",
+        }
 
         #Script pour nettoyer les anciens kernels
         file { "/usr/sbin/purgekernel":
