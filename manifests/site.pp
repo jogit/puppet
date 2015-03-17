@@ -10,7 +10,7 @@ import "fichiers"
 node default {
   include logiciels
   include fichiers
-  include nrpe
+  #include nrpe
   class { 'nrpe':
     dont_blame_nrpe => '1',
     allowed_hosts => ['172.20.170.32', '172.20.170.12']
