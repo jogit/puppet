@@ -7,7 +7,7 @@ import "logiciels"
 import "fichiers"
 
 
-node basenode {
+node default {
   include logiciels
   include fichiers
   include nrpe

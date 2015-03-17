@@ -12,11 +12,12 @@ class fichiers {
         file { "/usr/sbin/purgekernel":
                 owner => root,
                 group => root,
-                mode => 0755,
+                mode => '0755',
                 ensure => present,
-                source => $is_proxmox ? {
-                        "true" => "puppet:///files/usr/sbin/purgekernel_proxmox",
-                        "false" => "puppet:///files/usr/sbin/purgekernel",
+                source => $::is_proxmox ? {
+                        true => "puppet:///files/usr/sbin/purgekernel_proxmox",
+                        false => "puppet:///files/usr/sbin/purgekernel",
+                        default => "puppet:///files/usr/sbin/purgekernel_proxmox"
                 }
         }
        file { "/etc/apt/apt.conf.d/88pergekernel":
@@ -25,7 +26,7 @@ class fichiers {
         file { "/etc/apt/apt.conf.d/88purgekernel":
                 owner => root,
                 group => root,
-                mode => 644,
+                mode => '0644',
                 source => "puppet:///files/etc/apt/apt.conf.d/88purgekernel",
                 ensure => present,
         }
@@ -35,7 +36,7 @@ class fichiers {
         file { "/etc/apt/apt.conf":
                 owner   => root,
                 group   => root,
-                mode    => 644,
+                mode    => '0644',
                 source  => "puppet:///files/etc/apt/apt.conf",
                 ensure => present,
         }
