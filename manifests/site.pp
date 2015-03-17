@@ -15,6 +15,9 @@ node default {
     dont_blame_nrpe => '1',
     allowed_hosts => ['172.20.170.32', '172.20.170.12']
   }
+  nrpe::plugin { 'check_foobar':
+              source => 'files/nrpe/check_foobar'
+        }
   }
 
 
