@@ -1,3 +1,4 @@
+#Maintenu par JRA
 filebucket { 'main': server => 'n-puppet-01.stgibm.univ-fcomte.fr' }
 File { backup => 'main' }
 import "nodes"
