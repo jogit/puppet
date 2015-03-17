@@ -17,7 +17,7 @@ node default {
   }
   
   nrpe::plugin { 'check_foobar':
-              source_prefix => 'puppet:///'
+              source_prefix => 'puppet:///',
               source => 'files/nrpe/check_foobar'
         }
   }
