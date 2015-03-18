@@ -13,16 +13,6 @@ class logiciels {
         package { "sipcalc": ensure => latest }
         package { "rsyslog": ensure => latest }
 
-#       package { "rkhunter": ensure => latest }
-#       file { "/etc/default/rkhunter":
-#               require => Package["rkhunter"],
-#               mode   => 644,
-#               owner  => root,
-#               group  => root,
-#               source => "puppet:///files/etc/default/rkhunter",
-#       }
-
-
 # Les softs que l'on ne veut pas
         package { "pppoe": ensure => purged }
         package { "ppp": ensure => purged }
