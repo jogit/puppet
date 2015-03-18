@@ -38,14 +38,16 @@ class fichiers {
     source  => "puppet:///modules/fichiers/etc/apt/apt.conf",
     ensure => present,
   }
+ 
   
-  file {"/root/.bashrc":
-    owner   => root,
-    group   => root,
-    mode    => '0644',
-    source  => $::osfamily ? {
-      'Ubuntu' => "puppet:///modules/fichiers/root/bashrc.ubuntu",
-      default  => ""
+  if $::osfamily == 'Ubuntu' {
+    file {"/root/.bashrc":
+      owner   => root,
+      group   => root,
+      mode    => '0644',
+      source  => 'puppet:///modules/fichiers/root/bashrc.ubuntu',
     }
   }
+}
+  
 }
