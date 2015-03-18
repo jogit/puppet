@@ -27,8 +27,16 @@ node default {
 #  com2sec      => [ 'notConfigUser 10.20.30.40/32 SeCrEt' ],
   contact      => 'pole-informatique.stgi@univ-fcomte.fr',
   location     => 'UFR STGI Belfort',
+<<<<<<< HEAD
   ro_community      => 'stgi 172.20.170.32'
 
+=======
+
+
+  }
+
+        
+>>>>>>> origin/master
   }
 
         
