@@ -30,6 +30,19 @@ node default {
 <<<<<<< HEAD
    ro_community      => 'stgi 172.20.170.32',
     }
+=======
+<<<<<<< HEAD
+  ro_community      => 'stgi 172.20.170.32'
+
+=======
+
+
+  }
+
+        
+>>>>>>> origin/master
+  }
+>>>>>>> a255267721cbd2f4fa3d7055a0df02714ee34e03
 
         
 
