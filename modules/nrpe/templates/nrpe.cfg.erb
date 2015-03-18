@@ -33,7 +33,8 @@ command[check_ageandcontent]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_ag
 command[check_total_procs]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_procs -w 150 -c 200 
 command[check_ntp]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_ntp -H <%= scope.lookupvar("nrpe::ntp") %>
 command[check_ntp_time]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_ntp_time -H $ARG1$ -w $ARG2$ -c $ARG3$
-command[event_ntp]=<%= scope.lookupvar('nrpe::pluginsdir') %>//event_ntp.sh -H $ARG1$ -w $ARG2$ -c $ARG3$
+command[event_ntp]=<%= scope.lookupvar('nrpe::pluginsdir') %>/event_ntp.sh -H $ARG1$ -w $ARG2$ -c $ARG3$
+command[check_disk]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$
 <% if @osfamily == 'Debian' -%>
 command[check_apt]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_apt
 <% end -%>
