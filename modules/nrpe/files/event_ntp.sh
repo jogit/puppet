@@ -23,7 +23,7 @@ case "$SERVICESTATE" in
         # Etat inconnu. On ne fait rien.
         ;;
     CRITICAL)
-        # Etat critique. On ne va relancer apache qu'au deuxieme etat CRITICAL SOFT, ou a l etat HARD.
+        # Etat critique. On ne va lancer ntpdate qu'au deuxieme etat CRITICAL SOFT, ou a l etat HARD.
         case "$SERVICESTATETYPE" in
             SOFT)
                 # Verification du nombre de tentatives
