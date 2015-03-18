@@ -8,20 +8,21 @@ class fichiers {
   }
 
   #Script pour nettoyer les anciens kernels
-file { "/usr/sbin/purgekernel":
-  owner => root,
-  group => root,
-  mode => '0755',
-  ensure => present,
-  source => $::is_proxmox ? {
-    true => "puppet:///modules/fichiers/usr/sbin/purgekernel_proxmox",
-    false => "puppet:///modules/fichiers/usr/sbin/pugekernel",
-    default => "puppet:///modules/fichiers/usr/sbin/purgekernel_proxmox"
+  file { "/usr/sbin/purgekernel":
+    owner => root,
+    group => root,
+    mode => '0755',
+    ensure => present,
+    source => $::is_proxmox ? {
+      true => "puppet:///modules/fichiers/usr/sbin/purgekernel_proxmox",
+      false => "puppet:///modules/fichiers/usr/sbin/pugekernel",
+      default => "puppet:///modules/fichiers/usr/sbin/purgekernel_proxmox"
+    }
   }
-}
   file { "/etc/apt/apt.conf.d/88pergekernel":
     ensure => absent,
   }
+  
   file { "/etc/apt/apt.conf.d/88purgekernel":
     owner => root,
     group => root,
@@ -36,5 +37,15 @@ file { "/usr/sbin/purgekernel":
     mode    => '0644',
     source  => "puppet:///modules/fichiers/etc/apt/apt.conf",
     ensure => present,
-}
+  }
+  
+  file {"/root/.bashrc":
+    owner   => root,
+    group   => root,
+    mode    => '0644',
+    source  => $::osfamily ? {
+      'Ubuntu' => "puppet:///modules/fichiers/root/bashrc.ubuntu",
+      default  => ""
+    }
+  }
 }
