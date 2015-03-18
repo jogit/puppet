@@ -16,6 +16,7 @@ node default {
     allowed_hosts => ['172.20.170.32', '172.20.170.12']
   }
   
+  }
   nrpe::plugin { 'event_ntp':
              # source_prefix => 'puppet:///',
               source => 'nrpe/event_ntp.sh'
