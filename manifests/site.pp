@@ -28,6 +28,7 @@ node default {
   contact      => 'pole-informatique.stgi@univ-fcomte.fr',
   location     => 'UFR STGI Belfort',
    ro_community      => 'stgi 172.20.170.32',
+   ro_network   => '172.20.170.32',
     }
 
 
