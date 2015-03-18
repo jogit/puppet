@@ -21,6 +21,17 @@ node default {
              # source_prefix => 'puppet:///',
               source => 'nrpe/event_ntp.sh'
         }
+        
+  class { 'snmp':
+  agentaddress => [ 'udp:161' ],
+#  com2sec      => [ 'notConfigUser 10.20.30.40/32 SeCrEt' ],
+  contact      => 'pole-informatique.stgi@univ-fcomte.fr',
+  location     => 'UFR STGI Belfort',
+
+
+  }
+
+        
   }
 
 
