@@ -16,7 +16,7 @@ class fichiers {
     source => $::is_proxmox ? {
       true => "puppet:///modules/fichiers/usr/sbin/purgekernel_proxmox",
       false => "puppet:///modules/fichiers/usr/sbin/pugekernel",
-      default => "puppet:///modules/fichiers/usr/sbin/purgekernel_proxmox"
+      default => "puppet:///modules/fichiers/usr/sbin/purgekernel"
     }
   }
   file { "/etc/apt/apt.conf.d/88pergekernel":
