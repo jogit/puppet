@@ -30,13 +30,14 @@ node default {
     ro_community  => 'stgi',
     ro_network    => '172.20.170.32',
   }
-}
   
-#Configuration des plugins de NRPE
+  #Configuration des plugins de NRPE
 nrpe::plugin { 'event_ntp':
              source => 'nrpe/event_ntp.sh'
 }
 nrpe::plugin { 'check_puppet_agent':
              source => 'nrpe/check_puppet_agent.sh'
+}
+  
 }
   
