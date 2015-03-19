@@ -4,7 +4,7 @@ File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 
 #a transformer en module
-import "logiciels"
+#import "logiciels"
 
 
 

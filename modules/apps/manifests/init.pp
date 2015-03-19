@@ -20,4 +20,3 @@ class logiciels {
         package { "pppoeconfig": ensure => purged }
 
 }
-
