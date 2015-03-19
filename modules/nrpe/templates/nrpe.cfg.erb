@@ -35,6 +35,7 @@ command[check_ntp]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_ntp -H <%= s
 command[check_ntp_time]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_ntp_time -H $ARG1$ -w $ARG2$ -c $ARG3$
 command[event_ntp]=<%= scope.lookupvar('nrpe::pluginsdir') %>/event_ntp.sh -H $ARG1$ -w $ARG2$ -c $ARG3$
 command[check_disk]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$
+command[check_puppet_agent]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_puppet_agent
 <% if @osfamily == 'Debian' -%>
 command[check_apt]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_apt
 <% end -%>

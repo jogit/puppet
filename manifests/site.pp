@@ -3,12 +3,19 @@ filebucket { 'main': server => 'n-puppet-01.stgibm.univ-fcomte.fr' }
 File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 
+#TODO: a transformer en module
 import "logiciels"
 
 
+
+#définition d'un serveur par défaut.
 node default {
+  #installation des logiciels de base
   include logiciels
+  
+  #copie des fichiers
   include fichiers
+
 
   #Configuration de NRPE
   class { 'nrpe':
@@ -24,11 +31,13 @@ node default {
     ro_community  => 'stgi',
     ro_network    => '172.20.170.32',
   }
-
 }
   
 #Configuration des plugins de NRPE
 nrpe::plugin { 'event_ntp':
              source => 'nrpe/event_ntp.sh'
+}
+nrpe::plugin { 'check_puppet_agent':
+             source => 'nrpe/check_puppet_agent.sh'
 }
   
