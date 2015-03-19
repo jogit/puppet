@@ -49,7 +49,7 @@ node default {
   
   
   
-node n-backupc-01 {
+node n-backup-01 {
   nrpe::plugin { 'check_backuppc':
         source => 'nrpe/check_backuppc'
   }
