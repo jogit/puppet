@@ -3,8 +3,6 @@ filebucket { 'main': server => 'n-puppet-01.stgibm.univ-fcomte.fr' }
 File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 
-
-
 node default {
   #installation des logiciels de base
   include apps
@@ -42,6 +40,5 @@ node default {
     priority => 10,
     content  => "nagios  ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/",
   }
-
 }
   
