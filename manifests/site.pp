@@ -38,6 +38,14 @@ nrpe::plugin { 'event_ntp':
 nrpe::plugin { 'check_puppet_agent':
              source => 'nrpe/check_puppet_agent.sh'
 }
-  
+
+class { 'sudo': }
+sudo::conf { 'nagios':
+  priority => 10,
+  content  => "nagios  ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/",
+}
+
+
+
 }
   
