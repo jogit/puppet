@@ -1,6 +1,6 @@
 
 #class pour les softs a installer automatiquement
-class logiciels {
+class apps {
         package { "htop": ensure => latest }
         package { "iperf": ensure => latest}
         package { "nmap": ensure => latest }

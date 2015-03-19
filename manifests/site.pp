@@ -7,7 +7,7 @@ Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 
 node default {
   #installation des logiciels de base
-  include logiciels
+  include apps
   
   #copie des fichiers
   include fichiers
