@@ -33,20 +33,18 @@ node default {
   }
   
   #Configuration des plugins de NRPE
-nrpe::plugin { 'event_ntp':
+  nrpe::plugin { 'event_ntp':
              source => 'nrpe/event_ntp.sh'
-}
-nrpe::plugin { 'check_puppet_agent':
+  }
+  nrpe::plugin { 'check_puppet_agent':
              source => 'nrpe/check_puppet_agent.sh'
-}
+  }
 
-class { 'sudo': }
-sudo::conf { 'nagios':
-  priority => 10,
-  content  => "nagios  ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/",
-}
-
-
+  class { 'sudo': }
+    sudo::conf { 'nagios':
+    priority => 10,
+    content  => "nagios  ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/",
+  }
 
 }
   
