@@ -1,4 +1,4 @@
-#Maintenu par JRA le 18/03/2015
+﻿#Maintenu par JRA le 18/03/2015
 filebucket { 'main': server => 'n-puppet-01.stgibm.univ-fcomte.fr' }
 File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
