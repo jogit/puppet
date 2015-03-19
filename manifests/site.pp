@@ -22,7 +22,6 @@ node default {
   class { 'nrpe':
     dont_blame_nrpe => '1',
     allowed_hosts => ['172.20.170.32', '172.20.170.12'],
-    command_prefix => '/usr/bin/sudo',
   }
 
   #Configuration de SNMP      
