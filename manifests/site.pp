@@ -47,7 +47,14 @@ node default {
     content  => "nagios  ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/",
   }
   
+ #pour ubuntu 
+ 
+#  $snmpd_options    = '-Lsd -Lf /dev/null -p /var/run/snmpd.pid -a'
+#$snmptrapd_options = '-Lsd -p /var/run/snmptrapd.pid'
   
+  #pour debian 
+#$snmpd_options            = '-Lsd -Lf /dev/null -u snmp -g s0nmp -I -smux -p /var/run/snmpd.pid'
+#$snmptrapd_options        = '-Lsd -p /var/run/snmptrapd.pid'
   
 node n-backup-01 {
   nrpe::plugin { 'check_backuppc':

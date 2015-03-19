@@ -291,7 +291,7 @@ class snmp::params {
         }
         default: {
           if $majdistrelease <= '5' {
-            $snmpd_options    = '-Lsd -Lf /dev/null -p /var/run/snmpd.pid -a'
+            $snmpd_options    = '-Ls6d -Lf /dev/null -p /var/run/snmpd.pid -a'
             $sysconfig        = '/etc/sysconfig/snmpd.options'
             $trap_sysconfig   = '/etc/sysconfig/snmptrapd.options'
             $var_net_snmp     = '/var/net-snmp'
@@ -303,7 +303,7 @@ class snmp::params {
             $var_net_snmp     = '/var/lib/net-snmp'
             $varnetsnmp_perms = '0755'
           }
-          $snmptrapd_options = '-Lsd -p /var/run/snmptrapd.pid'
+          $snmptrapd_options = '-Ls6d -p /var/run/snmptrapd.pid'
         }
       }
       $package_name             = 'net-snmp'
@@ -326,7 +326,7 @@ class snmp::params {
       $service_config_perms     = '0600'
       $service_config_dir_group = 'root'
       $service_name             = 'snmpd'
-      $snmpd_options            = '-Lsd -Lf /dev/null -u snmp -g snmp -I -smux -p /var/run/snmpd.pid'
+      $snmpd_options            = '-Ls6d -Lf /dev/null -u snmp -g snmp -I -smux -p /var/run/snmpd.pid'
       $sysconfig                = '/etc/default/snmpd'
       $var_net_snmp             = '/var/lib/snmp'
       $varnetsnmp_perms         = '0755'
@@ -337,7 +337,7 @@ class snmp::params {
       $client_config            = '/etc/snmp/snmp.conf'
 
       $trap_service_config      = '/etc/snmp/snmptrapd.conf'
-      $snmptrapd_options        = '-Lsd -p /var/run/snmptrapd.pid'
+      $snmptrapd_options        = '-Ls6d -p /var/run/snmptrapd.pid'
     }
     'Suse': {
       $package_name             = 'net-snmp'
