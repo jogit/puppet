@@ -3,7 +3,7 @@ filebucket { 'main': server => 'n-puppet-01.stgibm.univ-fcomte.fr' }
 File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 
-#TODO: a transformer en module
+#AFAIRE: a transformer en module
 import "logiciels"
 
 
