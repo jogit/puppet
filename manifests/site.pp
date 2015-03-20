@@ -56,9 +56,9 @@ node n-backup-01 {
  include postfix
 
   class {'postfix::relay':
-         sender_hostname=>'$::hostname',
-         masquerade_domains=>'univ-fcomte.fr',
-         relayhost=>'smtp.univ-fcomte.fr'
+         sender_hostname => $::hostname,
+         masquerade_domains => 'univ-fcomte.fr',
+         relayhost => 'smtp.univ-fcomte.fr'
   }
 
  
