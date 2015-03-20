@@ -51,12 +51,11 @@ node n-backup-01 {
   }
 }
  
-
 #POSTFIX
  include postfix
 
   class {'postfix::relay':
-         sender_hostname => $::hostname,
+         sender_hostname => $::fqdn,
          masquerade_domains => 'univ-fcomte.fr',
          relayhost => 'smtp.univ-fcomte.fr'
   }
