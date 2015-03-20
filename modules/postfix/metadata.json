@@ -1,0 +1,40 @@
+{
+  "name": "mjhas/postfix",
+  "version": "1.0.0",
+  "author": "mjhas",
+  "summary": "This Postfix Module installs postfix and configures it using Augeas",
+  "license": "Apache License 2.0",
+  "source": "https://github.com/mjhas/postfix.git",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Redhat",
+      "operatingsystemrelease": [
+  
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+  
+      ]
+    }
+  ],
+  "issues_url": "https://github.com/mjhas/postfix/issues",
+  "requirements": [
+    {
+      "version_requirement": ">=2.7.20 <4.0.0",
+      "name": "puppet"
+    }
+  ],
+  "description": "This Postfix Module installs postfix and configures it using Augeas",
+  "project_page": "https://github.com/mjhas/postfix",
+  "dependencies": [
+  
+  ]
+}

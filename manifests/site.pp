@@ -4,18 +4,16 @@ File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 
 
-
-
 node default {
   
 }
 
 
-  #installation des logiciels de base
-  include apps
+#installation des logiciels de base
+include apps
   
-  #copie des fichiers
-  include fichiers
+#copie des fichiers
+include fichiers
 
 
   #Configuration de NRPE
@@ -46,20 +44,23 @@ node default {
     priority => 10,
     content  => "nagios  ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/",
   }
-  
- #pour ubuntu 
  
-#  $snmpd_options    = '-Lsd -Lf /dev/null -p /var/run/snmpd.pid -a'
-#$snmptrapd_options = '-Lsd -p /var/run/snmptrapd.pid'
-  
-  #pour debian 
-#$snmpd_options            = '-Lsd -Lf /dev/null -u snmp -g s0nmp -I -smux -p /var/run/snmpd.pid'
-#$snmptrapd_options        = '-Lsd -p /var/run/snmptrapd.pid'
-  
 node n-backup-01 {
   nrpe::plugin { 'check_backuppc':
         source => 'nrpe/check_backuppc'
   }
 }
+ 
+
+#POSTFIX
+ include postfix
+
+  class {'postfix::relay':
+         sender_hostname=>'$::hostname',
+         masquerade_domains=>'univ-fcomte.fr',
+         relayhost=>'smtp.univ-fcomte.fr'
+  }
+
+ 
   
   
