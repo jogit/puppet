@@ -9,9 +9,9 @@ class apps {
         package { "vim": ensure => latest }
         package { "ncdu": ensure => latest }
         package { "ipcalc": ensure => latest }
-        package { "unattended-upgrades": ensure => latest }
+        #package { "unattended-upgrades": ensure => latest }
         package { "sipcalc": ensure => latest }
-        package { "rsyslog": ensure => latest }
+        #package { "rsyslog": ensure => latest }
 
 # Les softs que l'on ne veut pas
         package { "pppoe": ensure => purged }
