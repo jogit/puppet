@@ -40,7 +40,7 @@ class fichiers {
   }
  
   
-  if $::osfamily == 'Ubuntu' {
+  if $::operatingsystem == 'Ubuntu' {
     file {"/root/.bashrc":
       owner   => root,
       group   => root,

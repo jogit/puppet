@@ -1,4 +1,3 @@
-
 #class pour les softs a installer automatiquement
 class apps {
         package { "htop": ensure => latest }
