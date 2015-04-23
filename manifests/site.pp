@@ -20,6 +20,7 @@ include apps
 class { 'nrpe':
   dont_blame_nrpe => '1',
   allowed_hosts => ['172.20.170.32', '172.20.170.12'],
+  command_timeout => '120'
 }
 
 
