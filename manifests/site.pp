@@ -48,6 +48,11 @@ sudo::conf { 'nagios':
     priority => 10,
     content  => "nagios  ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/",
 }
+
+#Configuration des serveurs NTP
+class { '::ntp':
+  servers => [ 'chronos.iut-bm.univ-fcomte.fr', 'ntp.univ-fcomte.fr' ],
+}
  
  
 #configuration de Postfix pour le relay SMTP
