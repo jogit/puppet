@@ -45,7 +45,7 @@ class fichiers {
   
 
 
-}
+
   file { "/etc/apt/apt.conf":
     owner   => root,
     group   => root,
