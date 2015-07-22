@@ -43,7 +43,7 @@ class fichiers {
     owner   => root,
     group   => root,
     mode    => '0644',
-    source  => "puppet:///modules/fichiers/etc/init.d/STGI.upstart",
+    source  => "puppet:///modules/fichiers/etc/init.d/STGI-upstart",
     ensure => present,
   }
  
