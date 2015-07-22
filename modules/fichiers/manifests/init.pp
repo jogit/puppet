@@ -10,7 +10,7 @@ class fichiers {
   #Script pour nettoyer les anciens kernels
   #Pas sur openvz car les kernel ne sont pas geres comme ca
   if $::virtual == 'openvz' {
-    file { "/etc/apt/apt.conf.d/88pergekernel":
+    file { "/etc/apt/apt.conf.d/88purgekernel":
       ensure => absent
     } 
     file { "/usr/sbin/purgekernel":
