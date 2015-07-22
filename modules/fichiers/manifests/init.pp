@@ -39,6 +39,14 @@ class fichiers {
     ensure => present,
   }
  
+  file { "/etc/init.d/STGI.upstart":
+    owner   => root,
+    group   => root,
+    mode    => '0644',
+    source  => "puppet:///modules/fichiers/etc/initd.STGI.upstart",
+    ensure => present,
+  }
+ 
   
   if $::operatingsystem == 'Ubuntu' {
     file {"/root/.bashrc":

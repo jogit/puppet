@@ -1,3 +1,12 @@
+# Serveur sur PUPPET : 
+#   n-backup-01
+#   n-fog-02
+#   n-stgibm-display
+#   n-web-01
+#   n-wiki-01
+#   n-opsi-01
+
+
 filebucket { 'main': server => 'n-puppet-01.stgibm.univ-fcomte.fr' }
 File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
@@ -6,6 +15,14 @@ Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 node default {  
 }
 
+
+#Service "STGI" car le upstart de ubuntu ne fonctionne pas correctement sous openvz
+node n-opsi-01 {
+  service { 'STGI-upstart':
+      ensure => running,
+      enable => true,
+    }
+}
   
 #copie des fichiers
 include fichiers
