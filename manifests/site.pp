@@ -16,14 +16,6 @@ node default {
 }
 
 
-#Service "STGI" car le upstart de ubuntu ne fonctionne pas correctement sous openvz
-if $::virtual == 'openvz' {
-  service { 'STGI-upstart':
-      ensure => running,
-      enable => true,
-    }
-}
-  
 #copie des fichiers
 include fichiers
 
@@ -87,3 +79,12 @@ node n-backup-01 {
         source => 'nrpe/check_backuppc'
   }
 } 
+
+#Service "STGI" car le upstart de ubuntu ne fonctionne pas correctement sous openvz
+if $::virtual == 'openvz' {
+  service { 'STGI-upstart':
+      ensure => running,
+      enable => true,
+    }
+}
+  
