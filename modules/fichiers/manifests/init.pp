@@ -39,10 +39,10 @@ class fichiers {
     ensure => present,
   }
  
-  file { "/etc/init.d/STGI.upstart":
+  file { "/etc/init.d/STGI-upstart":
     owner   => root,
     group   => root,
-    mode    => '0644',
+    mode    => '0755',
     source  => "puppet:///modules/fichiers/etc/init.d/STGI-upstart",
     ensure => present,
   }
