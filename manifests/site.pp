@@ -17,7 +17,7 @@ node default {
 
 
 #Service "STGI" car le upstart de ubuntu ne fonctionne pas correctement sous openvz
-node n-opsi-01 {
+if $::virtual == 'openvz' {
   service { 'STGI-upstart':
       ensure => running,
       enable => true,
