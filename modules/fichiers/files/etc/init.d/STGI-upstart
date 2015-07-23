@@ -19,6 +19,7 @@ case "$1" in
         start)
 
                 service portmap start
+                service rpcbind start
                 service nfs-kernel-server start
                 service nmbd start
                 service smbd start
@@ -27,6 +28,7 @@ case "$1" in
         stop)
 
                 service portmap stop
+                service rpcbind stop
                 service nfs-kernel-server stop
                 service nmbd stop
                 service smbd stop

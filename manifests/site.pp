@@ -7,6 +7,7 @@
 #   n-opsi-01
 
 
+
 filebucket { 'main': server => 'n-puppet-01.stgibm.univ-fcomte.fr' }
 File { backup => 'main' }
 Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
@@ -14,7 +15,6 @@ Exec { path => "/bin:/sbin:/usr/bin:/usr/sbin" }
 
 node default {  
 }
-
 
 #copie des fichiers
 include fichiers
