@@ -51,7 +51,6 @@ if $::is_omsa_installed == true {
    notify {"test srvadmin-all : NOT PRESENT":}
 }
 
-}
   
 #Configuration des plugins de NRPE
 nrpe::plugin { 'event_ntp':
