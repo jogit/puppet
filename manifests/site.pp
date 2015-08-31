@@ -42,11 +42,11 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
-if defined(Package['srvadmin-all']) {
+if defined(Package['htop']) {
   notify {"test srvadmin-all : OK":}
-  class { 'snmp':  
-    openmanage_enable => true,
-  }
+ # class { 'snmp':  
+ #   openmanage_enable => true,
+#  }
 }else{
    notify {"test srvadmin-all : NOT PRESENT":}
 }
