@@ -3,9 +3,9 @@
 Facter.add("is_proxmox") do
   setcode do
         if FileTest.exists?("/usr/bin/pveversion")
-                "true"
+                true
         else
-                "false"
+                false
         end
   end
 end

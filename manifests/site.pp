@@ -42,13 +42,11 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
-if ($::is_omsa_installed == 'true') {
-  notify {"test OMSA : OK":}
- # class { 'snmp':  
- #   openmanage_enable => true,
-#  }
-}else{
-   notify {"test OMSA : NOT PRESENT":}
+if ($::is_omsa_installed == true) {
+  notify {"ok":}
+ class { 'snmp':  
+    openmanage_enable => true,
+  }
 }
 
   
