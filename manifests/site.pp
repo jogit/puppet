@@ -42,13 +42,15 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
-if defined(Package['srvadmin-omacore']) {
+if $::is_omsa_installed == true {
   notify {"test srvadmin-all : OK":}
  # class { 'snmp':  
  #   openmanage_enable => true,
 #  }
 }else{
    notify {"test srvadmin-all : NOT PRESENT":}
+}
+
 }
   
 #Configuration des plugins de NRPE
