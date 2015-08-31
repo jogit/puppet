@@ -5,7 +5,7 @@
 #   n-web-01
 #   n-wiki-01
 #   n-opsi-01
-
+#   r-prox-01
 
 
 filebucket { 'main': server => 'n-puppet-01.stgibm.univ-fcomte.fr' }
@@ -42,6 +42,14 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
+if (ensure_resource('package', 'srvadmin-all'){
+   file {"/tmp/test":
+      owner   => root,
+      group   => root,
+      mode    => '0644',
+      source  => 'puppet:///modules/fichiers/tmp/test',
+    }
+}
   
 #Configuration des plugins de NRPE
 nrpe::plugin { 'event_ntp':
