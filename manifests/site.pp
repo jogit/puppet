@@ -42,12 +42,16 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
-if ($::is_omsa_installed == true) {
+if ($::is_omsa_installed) {
   notify {"ok":}
  class { 'snmp':  
     openmanage_enable => true,
   }
+}else {
+notify {"NOT PRESENT":}  
+  
 }
+
 
   
 #Configuration des plugins de NRPE
