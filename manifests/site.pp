@@ -42,7 +42,7 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
-if defined(Package['htop']) {
+if defined(Package['srvadmin-omacore']) {
   notify {"test srvadmin-all : OK":}
  # class { 'snmp':  
  #   openmanage_enable => true,
