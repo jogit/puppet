@@ -40,16 +40,28 @@ class { 'snmp':
   location      => 'UFR STGI Belfort',
   ro_community  => 'stgi',
   ro_network    => '172.20.170.32',
+  openmanage_enable => true,
 }
 
+# Si OMSA (DELL Manage) est installé 
 if ($::is_omsa_installed == 'true') {
-  notify {"CEST OK":}
- #class { 'snmp':  
- #   openmanage_enable => true,
- #}
-}else {
-notify {"NOT PRESENT":}  
-  
+  class { 'snmp':
+    agentaddress  => [ 'udp:161' ],
+    contact       => 'pole-informatique.stgi@univ-fcomte.fr',
+    location      => 'UFR STGI Belfort',
+    ro_community  => 'stgi',
+    ro_network    => '172.20.170.32',
+    openmanage_enable => true,
+ }
+ 
+}else { #Si OMSA n'est pas installé
+  class { 'snmp':
+    agentaddress  => [ 'udp:161' ],
+    contact       => 'pole-informatique.stgi@univ-fcomte.fr',
+    location      => 'UFR STGI Belfort',
+    ro_community  => 'stgi',
+    ro_network    => '172.20.170.32',
+  } 
 }
 
 
