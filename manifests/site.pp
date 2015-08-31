@@ -42,7 +42,7 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
-if ($::is_omsa_installed == true) {
+if ($::is_omsa_installed == 'true') {
   notify {"CEST OK":}
  #class { 'snmp':  
  #   openmanage_enable => true,
