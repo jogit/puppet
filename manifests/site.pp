@@ -43,8 +43,9 @@ class { 'snmp':
 }
 
 if defined(Package['srvadmin-all']) {
+  notify {"test srvadmin-all : OK":}
   class { 'snmp':  
-    openmanage_enable => true
+    openmanage_enable => true,
   }
 }
   
