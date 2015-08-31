@@ -34,7 +34,7 @@ class { 'nrpe':
 
 
 #Configuration de SNMP      
-# Si OMSA (DELL Manage) est installé 
+# Si OMSA (DELL Manage) est installe 
 if ($::is_omsa_installed == 'true') {
   class { 'snmp':
     agentaddress  => [ 'udp:161' ],
@@ -45,7 +45,7 @@ if ($::is_omsa_installed == 'true') {
     openmanage_enable => true,
  }
  
-}else { #Si OMSA n'est pas installé
+}else { #Si OMSA n est pas installe
   class { 'snmp':
     agentaddress  => [ 'udp:161' ],
     contact       => 'pole-informatique.stgi@univ-fcomte.fr',
