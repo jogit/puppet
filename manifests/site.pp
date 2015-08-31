@@ -42,7 +42,7 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
-if defined(Package['srvadmin_all']) {
+if defined(Package['srvadmin-all']) {
   class { 'snmp':  
     openmanage_enable => true
   }
