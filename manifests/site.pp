@@ -42,13 +42,10 @@ class { 'snmp':
   ro_network    => '172.20.170.32',
 }
 
-if (ensure_resource('package', 'srvadmin-all'){
-   file {"/tmp/test":
-      owner   => root,
-      group   => root,
-      mode    => '0644',
-      source  => 'puppet:///modules/fichiers/tmp/test',
-    }
+if (ensure_resource('package', 'srvadmin-all')){
+  class { 'snmp':  
+    openmanage_enable => true
+  }
 }
   
 #Configuration des plugins de NRPE
