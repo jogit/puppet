@@ -3,9 +3,9 @@
 Facter.add("is_omsa_installed") do
   setcode do
         if FileTest.exists?("/etc/init.d/dataeng")
-                "true"
+                true
         else
-                "false"
+                false
         end
   end
 end
