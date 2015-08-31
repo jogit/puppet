@@ -44,9 +44,9 @@ class { 'snmp':
 
 if ($::is_omsa_installed) {
   notify {"ok":}
- class { 'snmp':  
-    openmanage_enable => true,
-  }
+ #class { 'snmp':  
+ #   openmanage_enable => true,
+ #}
 }else {
 notify {"NOT PRESENT":}  
   
