@@ -47,6 +47,8 @@ if defined(Package['srvadmin-all']) {
   class { 'snmp':  
     openmanage_enable => true,
   }
+}else{
+   notify {"test srvadmin-all : NOT PRESENT":}
 }
   
 #Configuration des plugins de NRPE
