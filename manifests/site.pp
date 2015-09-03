@@ -57,14 +57,16 @@ if ($::is_omsa_installed == 'true') {
 
 
   
-#Configuration des plugins de NRPE
+#Installation des plugins NRPE
 nrpe::plugin { 'event_ntp':
          source => 'nrpe/event_ntp.sh'
 }
 nrpe::plugin { 'check_puppet_agent':
          source => 'nrpe/check_puppet_agent.sh'
 }
-
+nrpe::plugin { 'check_wbinfo':
+         source => 'nrpe/check_wbinfo'
+}
 
 class { 'sudo': }
 sudo::conf { 'nagios':
