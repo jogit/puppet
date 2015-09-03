@@ -64,7 +64,7 @@ nrpe::plugin { 'event_ntp':
 nrpe::plugin { 'check_puppet_agent':
          source => 'nrpe/check_puppet_agent.sh'
 }
-nrpe::plugin { 'check_wbinfo':
+nrpe::plugin { 'check_winbind':
          source => 'nrpe/check_wbinfo'
 }
 

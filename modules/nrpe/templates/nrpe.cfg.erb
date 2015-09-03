@@ -41,3 +41,5 @@ command[check_backuppc]=/usr/bin/sudo -u backuppc <%= scope.lookupvar('nrpe::plu
 <% if @osfamily == 'Debian' -%>
 command[check_apt]=<%= scope.lookupvar('nrpe::pluginsdir') %>/check_apt
 <% end -%>
+command[check_winbind]=/usr/bin/sudo <%= scope.lookupvar('nrpe::pluginsdir') %>/check_wbinfo
+
