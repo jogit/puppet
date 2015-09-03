@@ -326,7 +326,7 @@ class snmp::params {
       $service_config_perms     = '0600'
       $service_config_dir_group = 'root'
       $service_name             = 'snmpd'
-      $snmpd_options            = '-LS6d -Lf /dev/null -u snmp -g snmp -I -smux -p /var/run/snmpd.pid'
+      $snmpd_options            = '-LS6d -Lf /dev/null -u snmp -g snmp -p /var/run/snmpd.pid'
       $sysconfig                = '/etc/default/snmpd'
       $var_net_snmp             = '/var/lib/snmp'
       $varnetsnmp_perms         = '0755'
